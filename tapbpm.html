@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tap BPM</title>
+	<style>
+		#tapcontainer{
+			width:400px;
+			border-radius:30px;
+			border-style:solid;
+			border-width:1px;
+			font-size:40px;
+		}
+		.innerbpmdiv{
+			height:100px;
+			text-align:center;
+			vertical-align:middle
+		}
+		
+		.separator{
+			border-style:solid;
+			border-width:1px;
+		}
+		body{
+			font-family:Arial;
+		}
+	</style>
+	<script>
+		var count = 0;
+		var startTime = 0;
+		var prevTime = 0;
+		
+		function reset()
+		{
+			avg.value = "AVG";
+			last.value= "Last";
+			count.value = "0"
+		}
+		
+		function onTap()
+		{
+			var avg = document.getElementById('bpmavg');
+			var last = document.getElementById('bpmlast');
+			var ntaps = document.getElementById('ntaps');
+			
+			timeNow = new Date;
+			timeMs = timeNow.getTime();
+			
+			if((timeMs-prevTime) > 2000)
+			{
+				count = 0;
+			}
+			
+			if(count == 0){
+				startTime = timeMs;
+				prevTime = timeMs;
+			}
+			else
+			{
+				avg.innerHTML = (60000 * count / (timeMs - startTime)).toFixed(2);
+				last.innerHTML = (60000 / (timeMs - prevTime)).toFixed(2);
+				ntaps.innerHTML = count;
+				prevTime = timeMs;
+			}
+			count++;
+			return;
+		}
+		document.onkeypress = onTap;
+	</script>
+  
+  
+  </head>
+  <body>
+	<div class="container" align="center">
+		<h2>TAP BPM</h2>
+		<div id="tapcontainer">
+			<div class="innerbpmdiv"><p id="bpmavg">AVG</p></div>
+			<div class="separator"></div>
+			<div class="innerbpmdiv"><p id="bpmlast">Last</p></div>
+			<div class="separator"></div>
+			<div class="innerbpmdiv"><p id="ntaps">NTAPS</p></div>
+		</div>
+		</br>
+		<center>Tap any key..</center>
+	</div>
+  </body>
+</html>
