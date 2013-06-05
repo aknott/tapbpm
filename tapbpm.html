@@ -10,7 +10,6 @@
 			border-radius:30px;
 			border-style:solid;
 			border-width:1px;
-			font-size:30px;
 			margin:10px;
 		}
 		
@@ -35,14 +34,19 @@
 			text-align:center;
 		}
 		.innerbpmdiv{
-			height:60px;
 			text-align:center;
 			vertical-align:middle;
+			font-size:30px;
 		}
 		
 		.separator{
 			border-style:solid;
 			border-width:1px;
+		}
+		.label{
+			font-size:13px;
+			position: relative;
+			bottom: 0;
 		}
 		body{
 			font-family:Arial;
@@ -59,9 +63,10 @@
 		
 		function reset()
 		{
-			avg.value = "AVG";
-			last.value= "Last";
-			count.value = "0"
+			document.getElementById('bpmavg').innerHTML = "0.00";
+			document.getElementById('bpmlast').innerHTML= "0.00";
+			document.getElementById('ntaps').innerHTML = "0"
+			count = 0;
 		}
 		
 		function onTap()
@@ -70,10 +75,8 @@
 			var last = document.getElementById('bpmlast');
 			var ntaps = document.getElementById('ntaps');
 			
-			timeNow = new Date;
-			timeMs = timeNow.getTime();
-			
-			
+			timeMs = new Date().getTime();
+					
 			if((timeMs-prevTime) > 2000)
 			{
 				count = 0;
@@ -103,11 +106,20 @@
 		<h2>TAP BPM</h2>
 		<div id="tapcontainer">
 			<div id="displaycontainer">
-				<div class="innerbpmdiv"><p id="bpmavg">AVG</p></div>
+				<div class="innerbpmdiv">
+					<p id="bpmavg">0.00</p>
+					<p class="label">Average</p>
+				</div>
 				<div class="separator"></div>
-				<div class="innerbpmdiv"><p id="bpmlast">Last</p></div>
+				<div class="innerbpmdiv">
+					<p id="bpmlast">0.00</p>
+					<p class="label">Last Interval</p>
+				</div>
 				<div class="separator"></div>
-				<div class="innerbpmdiv"><p id="ntaps">NTAPS</p></div>
+				<div class="innerbpmdiv">
+					<p id="ntaps">0</p>
+					<p class="label"># of taps</p>
+				</div>
 				<div class="separator"></div>
 				<div id="buttondiv" class="innerbpmdiv">
 				<a href="#" id="tapbtn" onclick="onTap()">
@@ -119,7 +131,9 @@
 		</br>
 		
 		<center>-OR-</center>
-		<center>Tap any key..</center>
+		<center>Tap any key</center>
+		<br>
+		<center><a href="#" onclick="reset()">RESET</a></center>
 	</div>
   </body>
 </html>
