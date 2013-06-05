@@ -5,15 +5,39 @@
 	<style>
 		#tapcontainer{
 			width:400px;
+		}
+		#displaycontainer{
 			border-radius:30px;
 			border-style:solid;
 			border-width:1px;
-			font-size:40px;
+			font-size:30px;
+			margin:10px;
 		}
-		.innerbpmdiv{
+		
+		#buttondiv{
 			height:100px;
 			text-align:center;
-			vertical-align:middle
+			vertical-align:middle;
+			border-bottom-right-radius:30px;
+			border-bottom-left-radius:30px;
+			background: #D8D8D8;
+		}
+		
+		#tapbtn {
+			display: block;
+			color: #000000;
+			text-decoration: none;
+			font-size:30px;
+			position:relative; 
+			height:100%;
+			width:378px;
+			padding-top:35px;
+			text-align:center;
+		}
+		.innerbpmdiv{
+			height:60px;
+			text-align:center;
+			vertical-align:middle;
 		}
 		
 		.separator{
@@ -22,6 +46,10 @@
 		}
 		body{
 			font-family:Arial;
+		}
+		
+		p{
+			font-weight:bold;
 		}
 	</style>
 	<script>
@@ -44,6 +72,7 @@
 			
 			timeNow = new Date;
 			timeMs = timeNow.getTime();
+			
 			
 			if((timeMs-prevTime) > 2000)
 			{
@@ -73,13 +102,23 @@
 	<div class="container" align="center">
 		<h2>TAP BPM</h2>
 		<div id="tapcontainer">
-			<div class="innerbpmdiv"><p id="bpmavg">AVG</p></div>
-			<div class="separator"></div>
-			<div class="innerbpmdiv"><p id="bpmlast">Last</p></div>
-			<div class="separator"></div>
-			<div class="innerbpmdiv"><p id="ntaps">NTAPS</p></div>
+			<div id="displaycontainer">
+				<div class="innerbpmdiv"><p id="bpmavg">AVG</p></div>
+				<div class="separator"></div>
+				<div class="innerbpmdiv"><p id="bpmlast">Last</p></div>
+				<div class="separator"></div>
+				<div class="innerbpmdiv"><p id="ntaps">NTAPS</p></div>
+				<div class="separator"></div>
+				<div id="buttondiv" class="innerbpmdiv">
+				<a href="#" id="tapbtn" onclick="onTap()">
+					Tap Here
+				</a>
+				</div>
+			</div>
 		</div>
 		</br>
+		
+		<center>-OR-</center>
 		<center>Tap any key..</center>
 	</div>
   </body>
